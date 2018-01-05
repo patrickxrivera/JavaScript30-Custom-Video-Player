@@ -18,6 +18,10 @@ function updateButton() {
   toggle.textContent = icon;
 }
 
+function test() {
+  console.log('test');
+}
+
 function updateVideoTime() {
   let skipAmount = parseInt(this.dataset.skip);
   video.currentTime += skipAmount;
