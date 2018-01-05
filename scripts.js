@@ -14,17 +14,22 @@ function toggleVideo() {
 }
 
 function updateButton() {
-  if (video.paused) {
-    toggle.textContent = '►';
-  }
-  else {
-    toggle.textContent = '||';
-  }
+  let icon = this.paused ? '►' : '||';
+  toggle.textContent = icon;
 }
+
+function updateVideoTime() {
+  let skipAmount = parseInt(this.dataset.skip);
+  video.currentTime += skipAmount;
+}
+
 /* Hook Up Event Listeners */
 
 video.addEventListener('click', toggleVideo);
 video.addEventListener('play', updateButton);
 video.addEventListener('pause', updateButton);
 
+
 toggle.addEventListener('click', toggleVideo);
+
+skipButtons.forEach(button => button.addEventListener('click', updateVideoTime));
