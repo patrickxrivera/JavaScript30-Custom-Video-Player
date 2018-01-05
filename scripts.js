@@ -13,13 +13,18 @@ function toggleVideo() {
   video.paused ? video.play() : video.pause();
 }
 
-function renderPauseSymbol() {
-  toggle.textContent = '||';
+function updateButton() {
+  if (video.paused) {
+    toggle.textContent = '►';
+  }
+  else {
+    toggle.textContent = '||';
+  }
 }
-
 /* Hook Up Event Listeners */
 
-video.addEventListener('click', toggleVideo)
-video.addEventListener('pause', renderPauseSymbol)
+video.addEventListener('click', toggleVideo);
+video.addEventListener('play', updateButton);
+video.addEventListener('pause', updateButton);
 
-toggle.addEventListener('click', toggleVideo)
+toggle.addEventListener('click', toggleVideo);
