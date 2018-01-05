@@ -18,8 +18,8 @@ function updateButton() {
   toggle.textContent = icon;
 }
 
-function test() {
-  console.log('test');
+function anotherTest() {
+  console.log('anotherTest');
 }
 
 function updateVideoTime() {
