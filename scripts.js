@@ -28,19 +28,28 @@ function handleRangeVal() {
 }
 
 function handleProgressBar() {
-  let progress = video.currentTime / video.duration * 100;
+  let progress = (video.currentTime / video.duration) * 100;
   progressBar.style.flexBasis = `${progress}%`;
 }
 
-/* Hook Up Event Listeners */
+function scrub(e) {
+  let scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
+  video.currentTime = scrubTime;
+}
 
+/* Hook Up Event Listeners */
 video.addEventListener('click', toggleVideo);
 video.addEventListener('play', updateButton);
 video.addEventListener('pause', updateButton);
 video.addEventListener('timeupdate', handleProgressBar);
 
 toggle.addEventListener('click', toggleVideo);
+progress.addEventListener('click', scrub);
 
 skipButtons.forEach(button => button.addEventListener('click', updateVideoTime));
-
 ranges.forEach(range => range.addEventListener('input', handleRangeVal))
+
+let mouseUp = false;
+progress.addEventListener('mouseover', (e) => mouseUp && scrub(e));
+progress.addEventListener('mousedown', () => mouseUp = false);
+progress.addEventListener('mouseup', () => mouseUp = true);
