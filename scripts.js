@@ -49,7 +49,7 @@ progress.addEventListener('click', scrub);
 skipButtons.forEach(button => button.addEventListener('click', updateVideoTime));
 ranges.forEach(range => range.addEventListener('input', handleRangeVal))
 
-let mouseUp = false;
-progress.addEventListener('mouseover', (e) => mouseUp && scrub(e));
-progress.addEventListener('mousedown', () => mouseUp = false);
-progress.addEventListener('mouseup', () => mouseUp = true);
+let mouseDown = false;
+progress.addEventListener('mousemove', (e) => mouseUp && scrub(e));
+progress.addEventListener('mousedown', () => mouseDown = true);
+progress.addEventListener('mouseup', () => mouseDown = false);
