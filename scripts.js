@@ -7,7 +7,7 @@ const toggle = player.querySelector('.toggle');
 const skipButtons = player.querySelectorAll('[data-skip]');
 const ranges = player.querySelectorAll('.player__slider');
 
-/* Create Functions */
+/* Build Functions */
 function toggleVideo() {
   video.paused ? video.play() : video.pause();
 }
@@ -22,22 +22,25 @@ function updateVideoTime() {
   video.currentTime += skipAmount;
 }
 
-function updateRangeVal() {
-  if (this.name === 'volume') {
-    video.volume = this.value;
-  }
-  else if (this.name === 'playbackRate') {
-    video.playbackRate = this.value;
-  }
+function handleRangeVal() {
+  let targetProperty = this.name;
+  video[targetProperty] = this.value;
+}
+
+function handleProgressBar() {
+  let progress = video.currentTime / video.duration * 100;
+  progressBar.style.flexBasis = `${progress}%`;
 }
 
 /* Hook Up Event Listeners */
+
 video.addEventListener('click', toggleVideo);
 video.addEventListener('play', updateButton);
 video.addEventListener('pause', updateButton);
+video.addEventListener('timeupdate', handleProgressBar);
 
 toggle.addEventListener('click', toggleVideo);
 
 skipButtons.forEach(button => button.addEventListener('click', updateVideoTime));
 
-ranges.forEach(range => range.addEventListener('input', updateRangeVal))
+ranges.forEach(range => range.addEventListener('input', handleRangeVal))
